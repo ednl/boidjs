@@ -14,7 +14,7 @@ class Boid
 
     update(force)
     {
-        if (force instanceof p5.Vector) {
+        if (force && force instanceof p5.Vector) {
             this.acc = p5.Vector.div(force, this.mass);
             this.vel = p5.Vector.add(this.vel, this.acc);
             this.vel.mult(0.99).limit(2);
