@@ -1,12 +1,15 @@
 let fg, bg;
-let pursuer;
+let vehicle;
 
 function setup()
 {
     createCanvas(640, 640);
-    fg = color(255);
     bg = color(0);
-    pursuer = new Boid();
+    fg = color(255);
+    stroke(fg);
+    strokeWeight(1);
+    noFill();
+    vehicle = new Vehicle();
 }
 
 function draw()
@@ -16,7 +19,9 @@ function draw()
     scale(1, -1);
 
     let target = createVector(mouseX - width / 2, height / 2 - mouseY);
-    let force = p5.Vector.sub(target, pursuer.pos).div(1000);
-    pursuer.update(force);
-    pursuer.show();
+    let desired = vehicle.seek(target);
+    // let desired = vehicle.flee(target);
+
+    vehicle.update(desired);
+    vehicle.show();
 }
